@@ -1,4 +1,4 @@
-name: httpbin
+name: totoro
 
 on:
   push:
@@ -28,8 +28,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/httpbin-totoro:latest
-            ${{ secrets.DOCKER_USERNAME }}/httpbin-totoro:0.0.${{github.run_number}}
+            ${{ secrets.DOCKER_USERNAME }}/totoro:latest
+            ${{ secrets.DOCKER_USERNAME }}/totoro:0.0.${{github.run_number}}
 
       - name: Setup Kustomize
         uses: imranismail/setup-kustomize@v1
@@ -47,10 +47,10 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         run: |
-          cd totoro-gitops/httpbin-totoro/kustomize/dev
-          kustomize edit set image ${DOCKER_USERNAME}/httpbin-totoro=${DOCKER_USERNAME}/httpbin-totoro:0.0.${{github.run_number}}
+          cd totoro-gitops/totoro/kustomize/dev
+          kustomize edit set image ${DOCKER_USERNAME}/totoro=${DOCKER_USERNAME}/totoro:0.0.${{github.run_number}}
           git config user.name ${DOCKER_USERNAME}
           git config user.email  4044094+hardy4yooz@users.noreply.github.com 
           git add .
-          git commit -m "Auto comment by action at commit: $GITHUB_SHA"
+          git commit -m "Auto comment at commit: $GITHUB_SHA"
           git push
