@@ -54,3 +54,4 @@ jobs:
           git add .
           git commit -m "Auto comment at commit: $GITHUB_SHA"
           git push
+        continue-on-error: true
